@@ -1,0 +1,402 @@
+API Documentation
+
+Endpoints
+Custom Orders
+Endpoint: POST /custom-orders
+Description: Create a custom order.
+Authentication: May be required
+Request Body:
+
+json
+{
+    {"success":true,"message":"Custom order created successfully",
+    "data":
+    {"full_name":"Nikola","email":"super_adasasadmin@example.com",
+    "message":"asjdbasihdbaisd",
+    "image":"https://ik.imagekit.io/hx2cyuc3r/picture_bqKPfc3UP",
+    "link":"http://127.0.0.1:8000/api/custom-orders",
+    "updated_at":"2024-02-18T14:51:29.000000Z",
+    "created_at":"2024-02-18T14:51:29.000000Z","id":1}}
+}
+Response:
+Status Code: 201 (Created)
+
+
+
+Types
+List All Types
+
+Endpoint: GET /types
+Description: Retrieve a list of all types.
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+
+[
+    {
+        "data":
+        [{
+            "id":1,
+            "name":"helmets",
+            "category_id":1,
+            "deleted_at":null,
+            "created_at":"2024-02-18T01:56:18.000000Z",
+            "updated_at":"2024-02-18T01:56:18.000000Z"
+            },
+            {
+            "id":2,"name":"Bracelets",
+            "category_id":2,
+            "deleted_at":null,
+            "created_at":"2024-02-18T01:56:18.000000Z",
+            "updated_at":"2024-02-18T01:56:18.000000Z"
+        }],"0":200}
+]
+
+List Jewelry Types
+
+Endpoint: GET /jewelry
+Description: Retrieve a list of jewelry types.
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+
+Body:
+json
+[
+    {
+        "data":
+        [{
+            "id":2,
+            "name":"Bracelets",
+            "category_id":2,
+            "deleted_at":null,
+            "created_at":"2024-02-18T01:56:18.000000Z",
+            "updated_at":"2024-02-18T01:56:18.000000Z"
+        }],"0":200}
+]
+
+
+List Home Decor Types
+
+Endpoint: GET /home_decor
+Description: Retrieve a list of home decor types.
+Authentication: 
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    {
+        "data":
+        [{
+            "id":1,
+            "name":"helmets",
+            "category_id":1,
+            "deleted_at":null,
+            "created_at":"2024-02-18T01:56:18.000000Z",
+            "updated_at":"2024-02-18T01:56:18.000000Z"
+        }],"0":200}
+]
+List Types by Category
+
+Endpoint: GET /category/types/{categoryId}
+Description: Retrieve a list of types for a specific category.
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+Copy code
+[
+    // Include type details for each type in the category here
+]
+
+
+List Types by Category and Product Type
+
+Endpoint: GET /category/types/{categoryId}/{productId}
+Description: Retrieve a list of types for a specific category and product.
+Authentication:
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    {
+        "types":
+        [{
+            "id":1,
+            "name":"helmets",
+            "category_id":1,
+            "deleted_at":null,
+            "created_at":"2024-02-18T01:56:18.000000Z",
+            "updated_at":"2024-02-18T01:56:18.000000Z"}],
+            product":
+            {
+                "id":1,
+                "title":"Product 1",
+                "description":"Description for Product 1",
+                "price":"19.99",
+                "quantity":50,
+                "category_id":1,
+                "type_id":1,
+                "discount":5,
+                "is_featured":1,
+                "weight":"1.5",
+                "dimensions":"10x5x2",
+                "deleted_at":null,
+                "created_at":"2024-02-18T01:56:18.000000Z",
+                "updated_at":"2024-02-18T01:56:18.000000Z"
+            },"0":200}
+]
+
+
+
+Products
+List All Products
+
+Endpoint: GET /products
+Description: Retrieve a list of all products.
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    {"data":
+        [{"id":1,"title":"Product 1","description":"Description for Product 1","price":"19.99","quantity":50,"category_id":1,"type_id":1,"discount":5,"is_featured":1,"weight":"1.5","dimensions":"10x5x2","deleted_at":null,"created_at":"2024-02-18T01:56:18.000000Z","updated_at":"2024-02-18T01:56:18.000000Z","images":[{"id":2,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ffdd?text=dignissimos","product_id":1,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":4,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/007744?text=adipisci","product_id":1,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":17,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ddcc?text=quia","product_id":1,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"}],"materials":[],"maintenances":[]},{"id":2,"title":"Product 2","description":"Description for Product 2","price":"29.99","quantity":30,"category_id":2,"type_id":2,"discount":0,"is_featured":0,"weight":"2","dimensions":"15x8x3","deleted_at":null,"created_at":"2024-02-18T01:56:18.000000Z","updated_at":"2024-02-18T01:56:18.000000Z","images":[{"id":1,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/008888?text=et","product_id":2,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":8,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/004488?text=ea","product_id":2,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"}],"materials":[],"maintenances":[]},{"id":3,"title":"Product 3","description":"Description for Product 3","price":"39.99","quantity":40,"category_id":1,"type_id":2,"discount":10,"is_featured":1,"weight":"1.8","dimensions":"12x6x3","deleted_at":null,"created_at":"2024-02-18T01:56:18.000000Z","updated_at":"2024-02-18T01:56:18.000000Z","images":[{"id":5,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/0000ee?text=eaque","product_id":3,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":6,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/0033ff?text=qui","product_id":3,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":7,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/007711?text=magnam","product_id":3,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":11,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00aa77?text=accusantium","product_id":3,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":13,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ee77?text=quis","product_id":3,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":15,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00bb11?text=reiciendis","product_id":3,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"}],"materials":[],"maintenances":[]},{"id":4,"title":"Product 4","description":"Description for Product 4","price":"49.99","quantity":25,"category_id":2,"type_id":1,"discount":8,"is_featured":0,"weight":"1.2","dimensions":"8x4x2","deleted_at":null,"created_at":"2024-02-18T01:56:18.000000Z","updated_at":"2024-02-18T01:56:18.000000Z","images":[{"id":9,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/008888?text=placeat","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":10,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00aa44?text=nemo","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":12,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ff22?text=est","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":14,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/004455?text=blanditiis","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":16,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/0077ee?text=nobis","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":18,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/0099ee?text=ut","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":19,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ff00?text=nostrum","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"},{"id":20,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/009977?text=repudiandae","product_id":4,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"}],"materials":[],"maintenances":[]},{"id":5,"title":"Product 5","description":"Description for Product 5","price":"59.99","quantity":35,"category_id":1,"type_id":1,"discount":15,"is_featured":1,"weight":"2.2","dimensions":"14x7x4","deleted_at":null,"created_at":"2024-02-18T01:56:18.000000Z","updated_at":"2024-02-18T01:56:18.000000Z","images":[{"id":3,"image_url":"https:\/\/via.placeholder.com\/640x480.png\/00bb77?text=velit","product_id":5,"deleted_at":null,"created_at":"2024-02-18T01:56:19.000000Z","updated_at":"2024-02-18T01:56:19.000000Z"}],"materials":[],"maintenances":[]}],
+    "0":200}
+]
+
+
+Retrieve Product by ID
+
+Endpoint: GET /product/{id}
+Description: Retrieve details of a specific product by ID.
+Authentication: required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+{
+    {
+        "data":
+            [{
+                "id":1,
+                "title":"Product 1",
+                "description":"Description for Product 1",
+                "price":"19.99",
+                "quantity":50,
+                "category_id":1,
+                "type_id":1,
+                "discount":5,
+                "is_featured":1,
+                "weight":"1.5",
+                "dimensions":"10x5x2",
+                "deleted_at":null,
+                "created_at":"2024-02-18T01:56:18.000000Z",
+                "updated_at":"2024-02-18T01:56:18.000000Z",
+                    "images":
+                    [{
+                        "id":2,
+                        "image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ffdd?text=dignissimos",
+                        "product_id":1,
+                        "deleted_at":null,
+                        "created_at":"2024-02-18T01:56:19.000000Z",
+                        "updated_at":"2024-02-18T01:56:19.000000Z"
+                    },
+                    {
+                        "id":4,
+                        "image_url":"https:\/\/via.placeholder.com\/640x480.png\/007744?text=adipisci",
+                        "product_id":1,
+                        "deleted_at":null,
+                        "created_at":"2024-02-18T01:56:19.000000Z",
+                        "updated_at":"2024-02-18T01:56:19.000000Z"},
+                    {
+                        "id":17,
+                        "image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ddcc?text=quia",
+                        "product_id":1,
+                        "deleted_at":null,
+                        "created_at":"2024-02-18T01:56:19.000000Z",
+                        "updated_at":"2024-02-18T01:56:19.000000Z"
+                    }],
+                "materials":[],
+                "maintenances":[]
+                }]
+        }
+}
+
+
+
+List Products by Type
+
+Endpoint: GET /products/{typeId}
+Description: Retrieve a list of products for a specific type.
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    {
+        "data":
+            [{
+                "id":1,
+                "title":"Product 1",
+                "description":"Description for Product 1",
+                "price":"19.99",
+                "quantity":50,
+                "category_id":1,
+                "type_id":1,
+                "discount":5,
+                "is_featured":1,
+                "weight":"1.5",
+                "dimensions":"10x5x2",
+                "deleted_at":null,
+                "created_at":"2024-02-18T01:56:18.000000Z",
+                "updated_at":"2024-02-18T01:56:18.000000Z",
+                    "images":
+                    [{
+                        "id":2,
+                        "image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ffdd?text=dignissimos",
+                        "product_id":1,
+                        "deleted_at":null,
+                        "created_at":"2024-02-18T01:56:19.000000Z",
+                        "updated_at":"2024-02-18T01:56:19.000000Z"
+                    },
+                    {
+                        "id":4,
+                        "image_url":"https:\/\/via.placeholder.com\/640x480.png\/007744?text=adipisci",
+                        "product_id":1,
+                        "deleted_at":null,
+                        "created_at":"2024-02-18T01:56:19.000000Z",
+                        "updated_at":"2024-02-18T01:56:19.000000Z"},
+                    {
+                        "id":17,
+                        "image_url":"https:\/\/via.placeholder.com\/640x480.png\/00ddcc?text=quia",
+                        "product_id":1,
+                        "deleted_at":null,
+                        "created_at":"2024-02-18T01:56:19.000000Z",
+                        "updated_at":"2024-02-18T01:56:19.000000Z"
+                    }],
+                "materials":[],
+                "maintenances":[]
+                }]
+        }
+]
+
+
+Customer Authentication
+
+User Registration
+
+Endpoint: POST /register
+Description: Register a new user.
+Authentication: Not required
+Request Body:
+json
+
+{
+    
+}
+
+Response:
+Status Code: 201 (Created)
+Body:
+json
+
+{
+    
+}
+
+
+User Login
+
+Endpoint: POST /login
+Description: Log in an existing user.
+Authentication: required
+Request Body:
+json
+Copy code
+{
+    
+}
+Response:
+Status Code: 200 (OK)
+Body:
+json
+Copy code
+{
+    
+}
+
+FAQs
+List All FAQs
+Endpoint: GET /faq
+Description: Retrieve a list of frequently asked questions (FAQs).
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    {"success":true,"message":"FAQs retrieved successfully",
+    "data":
+    [
+        {"id":1,"question":"Do you ship worldwide?","answer":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure cumque dicta veniam sed sit minima.",
+        "deleted_at":null,
+        "created_at":"2024-02-18T01:56:19.000000Z",
+        "updated_at":"2024-02-18T01:56:19.000000Z"
+        },
+        {"id":2,"question":"Is copper jewerly safe to wear?","answer":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure cumque dicta veniam sed sit minima.",
+        "deleted_at":null,
+        "created_at":"2024-02-18T01:56:19.000000Z",
+        "updated_at":"2024-02-18T01:56:19.000000Z"}
+    ]}
+]
+Gallery
+List All Images in Gallery
+
+Endpoint: GET /gallery
+Description: Retrieve a list of all images in the gallery.
+Authentication: Not required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    "success":true,
+    "message":"FAQs retrieved successfully",
+    "data":
+    [
+        {"id":1,"images":"https:\/\/via.placeholder.com\/640x480.png\/00bbee?text=veniam",
+        "deleted_at":null,
+        "created_at":"2024-02-18T01:56:19.000000Z",
+        "updated_at":"2024-02-18T01:56:19.000000Z"},
+        {"id":2,"images":"https:\/\/via.placeholder.com\/640x480.png\/001100?text=nemo",
+        "deleted_at":null,
+        "created_at":"2024-02-18T01:56:19.000000Z",
+        "updated_at":"2024-02-18T01:56:19.000000Z"}
+    ]
+]
+List Latest Six Images in Gallery
+
+Endpoint: GET /gallery/latest
+Description: Retrieve the latest six images from the gallery.
+Authentication: required
+Response:
+Status Code: 200 (OK)
+Body:
+json
+[
+    {"id":1,"images":"https:\/\/via.placeholder.com\/640x480.png\/00bbee?text=veniam",
+        "deleted_at":null,
+        "created_at":"2024-02-18T01:56:19.000000Z",
+        "updated_at":"2024-02-18T01:56:19.000000Z"},
+        {"id":2,"images":"https:\/\/via.placeholder.com\/640x480.png\/001100?text=nemo",
+        "deleted_at":null,
+        "created_at":"2024-02-18T01:56:19.000000Z",
+        "updated_at":"2024-02-18T01:56:19.000000Z"}
+]

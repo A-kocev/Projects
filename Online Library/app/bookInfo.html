@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brainster library</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/e69ac45242.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      #commentMsg,
+      #noteMsg,
+      #editNote {
+        display: none;
+      }
+      a:hover {
+        text-decoration: none !important;
+      }
+      #logo:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="font-monospace bg-light">
+    <header>
+      <div class="container-fluid p-0">
+        <div class="row">
+          <nav class="navbar px-5 bg-dark text-white">
+            <div
+              class="d-flex flex-column align-items-center justify-content-center"
+              id="logo"
+            >
+              <img src="../images/Logo.png" alt="logo" id="logoImg" />
+              <span class="fs-5">Brainster Library</span>
+            </div>
+            <div id="userLog" class="d-flex align-items-center"></div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container py-5 my-5">
+        <div class="row">
+          <div class="col-5 d-flex justify-content-end" id="bookImg"></div>
+          <div class="col-5 ps-4 fs-5">
+            <h2 id="bookTitle" class="text-center"></h2>
+            <p id="bookAuthor" class="text-capitalize">
+              <span class="text-secondary">By:</span>
+            </p>
+            <hr />
+            <p id="bookCategory">
+              <span class="text-secondary">Category:</span>
+            </p>
+            <p id="bookYear">
+              <span class="text-secondary">Year published:</span>
+            </p>
+            <p id="bookPages">
+              <span class="text-secondary">Number of pages:</span>
+            </p>
+            <h3 class="text-secondary" id="aboutAuthor">About athor</h3>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-7">
+            <h3 class="text-center">Comments</h3>
+            <div id="commentMsg"></div>
+            <section id="commentsSection">
+              <ul class="list-group w-75 ms-auto">
+                <li class="list-group-item" id="postComment"></li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-5 text-center">
+            <section id="notesSection">
+              <h3 class="text-center">Private Notes</h3>
+              <div id="noteMsg" class="w-75 ms-auto"></div>
+              <div class="w-75 ms-auto" id="addNote">
+                <textarea
+                  id="noteContent"
+                  class="form-control"
+                  placeholder="Add your note here"
+                ></textarea>
+                <p id="noteContentMsg" class="text-danger text-start"></p>
+                <button
+                  class="btn btn-outline-dark w-25 d-block ms-auto mt-2"
+                  id="noteAddBtn"
+                >
+                  Add
+                </button>
+              </div>
+              <div class="w-75 ms-auto" id="editNote">
+                <textarea
+                  id="editNoteContent"
+                  class="form-control"
+                  placeholder="Add your note here"
+                ></textarea>
+                <input type="number" name="noteId" id="noteId" class="d-none" />
+                <p id="noteEditContentMsg" class="text-danger text-start"></p>
+                <div class="text-end">
+                  <button
+                    class="btn btn-danger w-25 d-inline-block mt-2"
+                    id="noteCancelEditBtn"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    class="btn btn-warning w-25 d-inline-block mt-2"
+                    id="noteEditBtn"
+                  >
+                    Edit
+                  </button>
+                </div>
+              </div>
+              <div class="accordion w-75 ms-auto mt-3" id="notes"></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-dark text-light py-2">
+      <div class="container text-center">
+        <h2 class="fs-1 m-0">&OpenCurlyQuote;&OpenCurlyQuote;</h2>
+        <div id="quote" class="w-75 mx-auto"></div>
+        <p class="m-0">
+          Made with <span class="text-danger">&hearts;</span> by Brainster
+          students
+        </p>
+      </div>
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./main.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // getting Book info
+        $.ajax({
+          url: ".././CRUD's/books.php",
+          method: "GET",
+          data: {
+            id: location.hash.substr(1),
+          },
+          success: function (response) {
+            $("#bookImg").append(`<img src="${response.img}">`);
+            $("#bookTitle").html(`${response.title}`);
+            $("#bookAuthor").append(
+              `${response.first_name} ${response.last_name}`
+            );
+            $("#bookCategory").append(`${response.name}`);
+            $("#bookYear").append(`${response.year_published}`);
+            $("#bookPages").append(`${response.number_of_pages}`);
+            $("#aboutAuthor").after(`<p>${response.short_bio}</p>`);
+          },
+        });
+        // checking if the user is logged
+        if (localStorage.getItem("firstName")) {
+          let commented = 0;
+          $("#userLog").html(`<p class="text-warning d-inline-block mx-2 text-capitalize mb-0">${localStorage.getItem("firstName")} ${localStorage.getItem("lastName")}</p><button class="btn btn-outline-warning mx-2" onclick="logOut()">Log out</button>`);
+          if (location.hash.includes("comment")) {
+            $("#commentMsg").html(`<p class="alert alert-success w-75 ms-auto">You have successufully commented on the book</p>` );
+            $("#commentMsg").fadeIn();
+            location.hash = location.hash.split("?")[0];
+            setTimeout(function () {
+              $("#commentMsg").fadeOut();
+            }, 2000);
+          }
+          // getting the comments
+          $.ajax({
+            url: ".././CRUD's/comments.php",
+            method: "GET",
+            data: {
+              id: location.hash.substr(1),
+              userId: localStorage.getItem("userId"),
+            },
+            success: function (response) {
+              $.each(response, function (index, value) {
+                // check if a user has a comment allready
+                if (value.user == localStorage.getItem("userId")) {
+                  $("#commentsSection ul")
+                    .append(`<li class="list-group-item" data-id="${value.comment_id}">
+                                    <h4 class="fw-medium text-capitalize mb-0"> ${value.first_name} ${value.last_name}</h4>
+                                    <p class="text-secondary">${value.datetime}</p>
+                                    <p class="text-end text-secondary" id="commentStatus">status:</p>
+                                    <p>${value.content}</p>
+                                    <button class="btn btn-danger deleteCommentBtn d-block w-25 ms-auto" data-id="${value.comment_id}">Delete</button> 
+                              </li>`);
+                  // checks the user comment status
+                  if (value.is_approved == 1) {
+                    $("#commentStatus").append(
+                      '<span class="text-success">Approved</span>'
+                    );
+                  } else if (value.is_approved == 2) {
+                    $("#commentStatus").append(
+                      '<span class="text-danger">Rejected</span>'
+                    );
+                  } else {
+                    $("#commentStatus").append(
+                      '<span class="text-warning">Pending</span>'
+                    );
+                  }
+                  commented = 1;
+                  $("#postComment").addClass("p-0");
+                  $("#postComment").empty();
+                } else {
+                  $("#commentsSection ul").append(`<li class="list-group-item">
+                                    <h4 class="fw-medium text-capitalize mb-0"> ${value.first_name} ${value.last_name}</h4>
+                                    <p class="text-secondary">${value.datetime}</p>
+                                    <p>${value.content}</p>
+                                 </li>`);
+                }
+              });
+              if (commented == 0) {
+                $("#postComment")
+                  .html(`<form method="POST" action=".././CRUD's/addItem.php">
+                                        <textarea name="content" placeholder="Type your comment here" class="form-control" required></textarea>  
+                                        <input name="user" class="d-none" value="${localStorage.getItem(
+                                          "userId"
+                                        )}">
+                                        <input name="book" class="d-none" value="${location.hash.substr(
+                                          1
+                                        )}">
+                                        <input name="item" value="comment" class="d-none">
+                                        <button class="btn btn-primary d-block w-25 ms-auto mt-2 addButton">Add</button>
+                                      </form> `);
+              }
+              // handling delete comment button
+              $(".deleteCommentBtn").click(function () {
+                $(`li[data-id=${$(this).data("id")}]`).remove();
+                $(
+                  "#postComment"
+                ).html(`<form method="POST" action=".././CRUD's/addItem.php">
+                                        <textarea name="content" placeholder="Type your comment here" class="form-control" required></textarea>  
+                                        <input name="user" class="d-none" value="${localStorage.getItem(
+                                          "userId"
+                                        )}">
+                                        <input name="book" class="d-none" value="${location.hash.substr(
+                                          1
+                                        )}">
+                                        <input name="item" value="comment" class="d-none">
+                                        <button class="btn btn-primary d-block w-25 ms-auto mt-2 addButton">Add</button>
+                                      </form> `);
+                $.ajax({
+                  url: ".././CRUD's/deleteItem.php",
+                  data: {
+                    id: $(this).data("id"),
+                    item: "comment",
+                  },
+                  method: "POST",
+                  success: function (response) {
+                    $("#commentMsg").html(
+                      `<p class="alert alert-danger w-75 ms-auto">${
+                        JSON.parse(response).message
+                      }</p>`
+                    );
+                    $("#commentMsg").fadeIn();
+                    setTimeout(function () {
+                      $("#commentMsg").fadeOut();
+                    }, 2000);
+                    commented = 0;
+                  },
+                });
+              });
+            },
+          });
+          $.ajax({
+            url: ".././CRUD's/notes.php",
+            data: {
+              id: location.hash.substr(1),
+              userId: localStorage.getItem("userId"),
+            },
+            success: function (response) {
+              $.each(response, function (index, value) {
+                $("#notes").append(`<div class="accordion-item" data-id="${value.note_id}">
+                                        <h2 class="accordion-header">
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#note${index + 1}"
+                                                aria-expanded="false"
+                                                aria-controls="note${index + 1}">Note #${index + 1}
+                                            </button>
+                                        </h2>
+                                    <div id="note${index + 1}" class="accordion-collapse collapse collapse">
+                                       <div class="accordion-body">
+                                            <p class="text-start" data-id="${value.note_id}">${value.content}</p>
+                                            <div class="text-end">
+                                                <button class="btn btn-warning mx-1 editNoteBtns" data-id="${value.note_id}" onclick="editNote(${value.note_id})">Edit</button>
+                                                <button class="btn btn-danger mx-1 deleteNoteBtns" data-id="${value.note_id}" onclick="deleteNote(${value.note_id})">Delete</button>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`);
+              });
+            },
+          });
+          // handling add note Button
+          $("#noteAddBtn").click(function () {
+            if ($("#noteContent").val().length == 0) {
+              $("#noteContentMsg").html("You cant add an empty note");
+            } else {
+              $.ajax({
+                url: ".././CRUD's/addItem.php",
+                method: "POST",
+                data: {
+                  item: "note",
+                  content: $("#noteContent").val(),
+                  book: location.hash.substr(1),
+                  user: localStorage.getItem("userId"),
+                },
+                success: function (response) {
+                  let lastNoteId = 0;
+                  if ($(".accordion-item:last-child .accordion-button").attr("data-bs-target")) {
+                    let lastAccordion = $(".accordion-item:last-child .accordion-button").attr("data-bs-target");
+                    let parts = lastAccordion.split("note");
+                    let noteNumber = parts[parts.length - 1];
+                    lastNoteId = parseInt(noteNumber);
+                  }
+                  lastInsertedNote = parseInt(JSON.parse(response).noteId);
+                  $("#noteContentMsg").html("");
+                  $("#notes").append(`<div class="accordion-item" data-id="${lastInsertedNote}">
+                                          <h2 class="accordion-header">
+                                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse data-bs-target="#note${lastNoteId + 1}" aria-expanded="false" aria-controls="note${lastNoteId + 1}">Note #${lastNoteId + 1}</button>
+                                          </h2>
+                                          <div id="note${lastNoteId + 1}" class="accordion-collapse collapse collapse">
+                                              <div class="accordion-body">
+                                                <p class="text-start" data-id="${lastInsertedNote}">${$("#noteContent").val()}</p>
+                                                  <div class="text-end">
+                                                      <button class="btn btn-warning mx-1 editNoteBtns" data-id="${lastInsertedNote}" onclick="editNote(${lastInsertedNote})">Edit</button>
+                                                      <button class="btn btn-danger mx-1 deleteNoteBtns" data-id="${lastInsertedNote}" onclick="deleteNote(${lastInsertedNote})">Delete</button>    
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>`);
+                  $("#noteContent").val("");
+                  $("#noteMsg").html(`<p class="alert alert-success">${JSON.parse(response).message}</p>`);
+                  $("#noteMsg").fadeIn();
+                  setTimeout(function () {
+                    $("#noteMsg").fadeOut();
+                  }, 2000);
+                },
+              });
+            }
+          });
+          // handling  note edit button
+          $("#noteEditBtn").click(function () {
+            if ($("#editNoteContent").val().length == 0) {
+              $("#noteEditContentMsg").html("You cant write an empty note");
+            } else {
+              const note = $("#noteId").val();
+              $.ajax({
+                url: ".././CRUD's/editItem.php",
+                method: "POST",
+                data: {
+                  item: "note",
+                  content: $("#editNoteContent").val(),
+                  noteId: note,
+                },
+                success: function (response) {
+                  $(`p[data-id="${note}"]`).text($("#editNoteContent").val());
+                  $("#editNote").hide();
+                  $("#addNote").show();
+                  $("#noteMsg").html(`<p class="alert alert-success">${JSON.parse(response).message}</p>`);
+                  $("#noteMsg").fadeIn();
+                  setTimeout(function () {
+                    $("#noteMsg").fadeOut();
+                  }, 2000);
+                },
+              });
+            }
+          });
+        } else {
+          $("#userLog").html(`<a class="btn  mx-2 btn-outline-warning" href="./dashboard.html?signIn">Sign In</a>
+                              <a class="btn  mx-2 btn-warning" href="./dashboard.html?signUp">Sign Up</a>`);
+        $("#notesSection").hide();
+        $.ajax({
+          url: ".././CRUD's/comments.php",
+          method: "GET",
+          data: {
+            id: location.hash.substr(1),
+          },
+          success: function (response) {
+            $.each(response, function (index, value) {
+              $("#postComment").before(`<li class="list-group-item">
+                                            <h4 class="fw-medium text-capitalize mb-0"> ${value.first_name} ${value.last_name}</h4>
+                                            <p class="text-secondary">${value.datetime}</p>
+                                            <p>${value.content}</p>
+                                            </li>`);
+            });
+          },
+        });
+        $("#postComment").html(
+          '<p class="alert alert-warning mb-0">You need to sign in for posting a comment or writing private note</p>'
+        );
+        $("#postComment").addClass("p-0");
+        }
+      });
+      // additional functions
+      function logOut() {
+        localStorage.clear();
+        history.pushState(
+          {},
+          document.title,
+          location.pathname + location.hash
+        );
+        location.reload();
+      }
+      function deleteNote(noteId) {
+        $.ajax({
+          url: ".././CRUD's/deleteItem.php",
+          method: "POST",
+          data: {
+            id: noteId,
+            item: "note",
+          },
+          success: function (response) {
+            $(`.accordion-item[data-id="${noteId}"]`).remove();
+            $("#noteMsg").html(`<p class="alert alert-danger">${JSON.parse(response).message}</p>`);
+            $("#noteMsg").fadeIn();
+            setTimeout(function () {
+              $("#noteMsg").fadeOut();
+            }, 2000);
+          },
+        });
+      }
+      function editNote(noteId) {
+        $("#addNote").hide();
+        $("#editNote").show();
+        $("#editNoteContent").val($(`p[data-id="${noteId}"]`).text());
+        $("#noteId").val(noteId);
+      }
+      $("#logo").click(function () {
+        location.href = "dashboard.html";
+      });
+      $("#noteCancelEditBtn").click(function () {
+        $("#editNote").hide();
+        $("#addNote").show();
+      });
+    </script>
+  </body>
+</html>

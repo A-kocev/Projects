@@ -1,0 +1,44 @@
+/* GENERAL STYLE FOR ALL THREE PAGES */
+.heroBanner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url(.././images/heroImage.jpg);
+  height: 85vh;
+  background-position: center;
+  background-size: cover;
+}
+h1 {
+  font-size: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#logoImg {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg)
+    brightness(104%) contrast(106%);
+}
+.row {
+  --bs-gutter-x: 0 !important;
+}
+#logoImg {
+  width: 50px;
+}
+.col-2 {
+  height: 100vh;
+}
+.wrapper {
+  top: 48px;
+}
+.card {
+  transition: all 0.5s ease;
+  background-color: whitesmoke;
+}
+.card:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}
+#bookImg img {
+  height: 50vh;
+  object-fit: contain;
+  width: auto;
+  margin-left: auto;
+}

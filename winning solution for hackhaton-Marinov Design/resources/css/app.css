@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.bg-primary-white{
+    background-color: #FBFAF8;
+}
+
+.bg-primary-rose{
+    background-color: #E0BAAD;
+}
+
+.nav-text{
+    color:  #3C1913;
+}
+.brown-underline{
+    text-decoration: underline ;
+    text-decoration-color: #3C1913;
+}

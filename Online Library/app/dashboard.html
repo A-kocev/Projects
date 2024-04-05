@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brainster library</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/e69ac45242.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      #signUpText:hover,
+      #signInText:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .card-img-top {
+        height: 40vh;
+        object-fit: fill;
+      }
+      a:hover {
+        text-decoration: underline !important;
+      }
+    </style>
+  </head>
+  <body class="font-monospace bg-light">
+    <header>
+      <div class="container-fluid p-0">
+        <div class="heroBanner text-light position-relative">
+          <div class="row">
+            <nav class="navbar px-5">
+              <div
+                class="d-flex flex-column align-items-center justify-content-center"
+              >
+                <img src="../images/Logo.png" alt="logo" id="logoImg" />
+                <span class="fs-5">Brainster Library</span>
+              </div>
+              <div id="userLog" class="d-flex align-items-center"></div>
+            </nav>
+          </div>
+          <h1 class="position-absolute text-center">
+            Discover the magic of reading
+          </h1>
+        </div>
+      </div>
+      <!-- modal 1 -->
+      <div
+        class="modal fade"
+        id="signInModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="signInModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="modal-title fs-5" id="exampleModalLabel"
+                >Sign In</span
+              >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form
+                action="../authentication/signIn.php"
+                method="post"
+                id="signInForm"
+              >
+                <label for="emailSignIn" class="form-label">E-mail:</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="emailSignIn"
+                  class="form-control mb-3"
+                />
+                <label for="passwordSignIn" class="form-label">Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="passwordSignIn"
+                  class="form-control mb-3"
+                />
+
+                <p>
+                  Don't have an acount?<span
+                    class="text-success"
+                    id="signUpText"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signUpModal"
+                    >Sign Up</span
+                  >
+                </p>
+
+                <div class="modal-footer">
+                  <button
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    type="button"
+                    id="closeSignInBtn"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="signInBtn"
+                    disabled
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal 2 -->
+      <div
+        class="modal fade"
+        id="signUpModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="signUpModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="modal-title fs-5" id="exampleModalLabel"
+                >Sign Up</span
+              >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form
+                action="../authentication/signUp.php"
+                method="post"
+                id="signUpForm"
+              >
+                <label for="firstName" class="form-label">First name:</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  class="form-control mb-3"
+                  required
+                />
+                <label for="lastName" class="form-label">Last name:</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  class="form-control mb-3"
+                  required
+                />
+                <label for="email" class="form-label">E-mail:</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="form-control mb-3"
+                  required
+                />
+                <label for="password" class="form-label">Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  class="form-control mb-3"
+                />
+                <p id="passwordMsg"></p>
+
+                <p>
+                  Already have an acount?<span
+                    class="text-primary"
+                    id="signInText"
+                    data-bs-dismiss="modal"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signInModal"
+                    aria-label="Close"
+                    >Sign In</span
+                  >
+                </p>
+
+                <div class="modal-footer">
+                  <button
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    type="button"
+                    id="closeSignUpBtn"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-success">Sign Up</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col-2 position-sticky p-2">
+          <div class="position-sticky wrapper">
+            <h2 class="text-center my-5 fs-2">Categories</h2>
+            <div id="categories"></div>
+          </div>
+        </div>
+        <div class="col-10 shadow-lg pb-5">
+          <h2 class="text-center my-5 fs-1">Books</h2>
+          <div class="row" id="books"></div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-dark text-light py-2">
+      <div class="container text-center">
+        <h2 class="fs-1 m-0">&OpenCurlyQuote;&OpenCurlyQuote;</h2>
+        <div id="quote" class="w-75 mx-auto"></div>
+        <p class="m-0">
+          Made with <span class="text-danger">&hearts;</span> by Brainster
+          students
+        </p>
+      </div>
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./main.js"></script>
+    <script>
+      let checked = 0;
+      $(document).ready(function () {
+        // getting the categories and implement filtering
+        $.ajax({
+          url: ".././CRUD's/categories.php",
+          success: function (response) {
+            $.each(response, function (index, value) {
+              $(
+                "#categories"
+              ).append(`<input type="checkbox" class="btn-check" id="${value.name}" autocomplete="off">
+                        <label class="btn btn-outline-secondary d-block m-3" for="${value.name}">${value.name}</label>`);
+            });
+            $(".btn-check").on("change", function () {
+              if ($(this).prop("checked")) {
+                if (checked == 0) {
+                  $(".cardWrapper").hide();
+                  $(`.${this.id}`).show();
+                  checked++;
+                } else {
+                  $(`.${this.id}`).show();
+                  checked++;
+                }
+              } else {
+                checked--;
+                if (checked == 0) {
+                  $(".cardWrapper").show();
+                } else {
+                  $(`.${this.id}`).hide();
+                }
+              }
+            });
+          },
+        });
+        // getting the books
+        $.ajax({
+          url: ".././CRUD's/books.php",
+          success: function (response) {
+            $.each(response, function (index, value) {
+              $(
+                "#books"
+              ).append(`<div class="col-3 p-3 cardWrapper ${value.name}">
+                                                <div class="card shadow-sm">
+                                                  <img src="${value.img}" class="card-img-top" alt="book cover image">
+                                                  <div class="card-body pb-2">
+                                                    <h3 class="card-title text-center">${value.title}</h3>
+                                                    <p class="card-text text-capitalize"><i class="fa-solid fa-user-pen d-inline-block me-1"></i>${value.first_name} ${value.last_name}</p>
+                                                    <p class="text-end text-secondary mb-1"><i class="fa-solid fa-tags d-inline-block me-2"></i>${value.name}</p>
+                                                    <p class="text-center mb-0"><a href="./bookInfo.html#${value.id}" class="d-inline-block text-decoration-none fs-4 ">Show more</a></p>
+                                                  </div>
+                                                </div>
+                                              </div>`);
+            });
+          },
+        });
+        // checking if a user is logged
+        if (localStorage.getItem("firstName")) {
+          logged();
+          if (location.search) {
+            history.pushState({}, document.title, location.pathname);
+            $(".heroBanner .row").after(
+              '<p class="alert alert-success w-25 text-center mx-auto opacity-75">You are logged successufully</p>'
+            );
+            setTimeout(function () {
+              $(".alert-success").slideUp();
+            }, 2000);
+          }
+        } else if (location.search) {
+          switch (true) {
+            case location.search.includes("Already"):
+              const signUpModalAlready = new bootstrap.Modal(
+                $("#signUpModal")[0]
+              );
+              signUpModalAlready.show();
+              $("#passwordMsg").after(
+                `<p class="alert alert-warning">${decodeURIComponent(
+                  location.search.substring(1)
+                )}</p>`
+              );
+              break;
+            case location.search.includes("In"):
+              const signInModal = new bootstrap.Modal($("#signInModal")[0]);
+              signInModal.show();
+              break;
+            case location.search.includes("Up"):
+              const signUpModalUp = new bootstrap.Modal($("#signUpModal")[0]);
+              signUpModalUp.show();
+              break;
+            case location.search.includes("Wrong"):
+              const signInModalWrong = new bootstrap.Modal(
+                $("#signInModal")[0]
+              );
+              signInModalWrong.show();
+              $("#passwordSignIn").after(
+                `<p class="alert alert-danger">${decodeURIComponent(
+                  location.search.substring(1)
+                )}</p>`
+              );
+              break;
+          }
+          notLogged();
+        } else {
+          notLogged();
+        }
+      });
+      // handling the Sign in
+      $("#signInForm").on("input", function () {
+        if (
+          $("#emailSignIn").val() != "" &&
+          $("#passwordSignIn").val().length >= 8
+        ) {
+          $("#signInBtn")[0].disabled = false;
+        } else {
+          $("#signInBtn")[0].disabled = true;
+        }
+      });
+      //handling the signup form
+      $("#signUpForm").submit(function (e) {
+        if ($("#password").val().length < 8) {
+          e.preventDefault();
+          $("#passwordMsg").html(
+            '<p class="text-danger">Please enter password with minimal 8 characters</p>'
+          );
+          $("#password").removeClass("mb-3");
+        }
+      });
+
+      // Addiotional functions and eventlisteners
+      $("#closeSignUpBtn,#closeSignInBtn, .btn-close").click(function () {
+        history.pushState({}, document.title, location.pathname);
+      });
+      $("#closeSignUpBtn, #signUpModal .btn-close , #signInText").click(
+        function () {
+          if ($("#signUpModal .alert-warning").length) {
+            $("#signUpModal .alert-warning").remove();
+          }
+        }
+      );
+      $("#closeSignInBtn, #signInModal .btn-close , #signUpText").click(
+        function () {
+          if ($("#signInModal .alert-danger").length) {
+            $("#signInModal .alert-danger").remove();
+          }
+        }
+      );
+
+      function logged() {
+        $("#userLog").html(
+          `<p class="text-warning d-inline-block mx-2 text-capitalize mb-0">${localStorage.getItem(
+            "firstName"
+          )} ${localStorage.getItem(
+            "lastName"
+          )}</p><button class="btn btn-outline-warning mx-2" onclick="logOut()">Log out</button>`
+        );
+      }
+      function notLogged() {
+        $("#userLog").html(`<button
+                  class="btn  mx-2 btn-outline-warning"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signInModal"
+                >
+                  Sign In
+                </button>
+                <button
+                  class="btn  mx-2 btn-warning"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signUpModal"
+                >
+                  Sign Up
+                </button>`);
+      }
+        function logOut() {
+        localStorage.clear();
+        history.pushState({}, document.title, window.location.pathname);
+        location.reload();
+      }
+    </script>
+  </body>
+</html>

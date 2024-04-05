@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    font-family: "Inter", sans-serif;
+}
+#guestBody {
+    background: linear-gradient(to bottom, #ffdbdb, #ffffff);
+}
+#searchIcon {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #555;
+    cursor: pointer;
+}
+.font-cormorant {
+    font-family: "Cormorant Garamond", serif;
+}
+.font-jost {
+    font-family: "Jost", sans-serif;
+}
+.listCard,
+.tableCard {
+    /* to not appear on page load , because with js appear on miliseconds */
+    display: none;
+}
+
+/* product images slider */
+.slider-inner {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.slide-inner img {
+    display: none;
+}
+.slide-inner img.active {
+    display: block;
+}
+.prev {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.next {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+#quantity::-webkit-inner-spin-button,
+#quantity::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+#quantity {
+    min-width: 25px;
+    width: 25px;
+}
+#edit_quantity {
+    min-width: 25px;
+}
+#brand,
+#category,
+#edit_brand,
+#edit_category,
+#discountStatus {
+    background-position-x: right;
+}
+.tags-look .tagify__dropdown__item {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 3px;
+    padding: 0.3em 0.5em;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    margin: 0.2em;
+    font-size: 0.85em;
+    color: black;
+    transition: 0s;
+}
+
+.tags-look .tagify__dropdown__item--active {
+    color: black;
+}
+
+.tags-look .tagify__dropdown__item:hover {
+    background: lightyellow;
+    border-color: gold;
+}
+
+.tags-look .tagify__dropdown__item--hidden {
+    max-width: 0;
+    max-height: initial;
+    padding: 0.3em 0;
+    margin: 0.2em 0;
+    white-space: nowrap;
+    text-indent: -20px;
+    border: 0;
+}
+.swal-modal {
+    width: 75%;
+}
+.item-container {
+    background-color: rgb(228, 228, 228) !important;
+    border-color: #666560 !important;
+}
+.item-label,
+.item-close-svg {
+    color: #666560 !important;
+}
+
+/* colors */
+.darkorange {
+    background-color: #ff835e;
+}
+.orange {
+    background-color: #fbc26c;
+}
+.yellow {
+    background-color: #fcff81;
+}
+.lightgreen {
+    background-color: #b9e5a4;
+}
+.skyblue {
+    background-color: #75d7f0;
+}
+.pink {
+    background-color: #ffdbdb;
+}
+.violet {
+    background-color: #ea97ff;
+}
+.gray {
+    background-color: #d9d9d9;
+}
+.white {
+    background-color: #ffffff;
+}
+.black {
+    background-color: #232221;
+}
+#check_icon {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.font-century {
+    font-family: "Libre Baskerville", serif;
+}
